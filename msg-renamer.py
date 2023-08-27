@@ -17,9 +17,8 @@ for path in paths:
             date_header = msg["date"]
 
             if date_header:
-                removeback = date_header.replace(" +0200", "")
-                date_time_str = removeback
-                date_time_obj = datetime.datetime.strptime(date_time_str, '%a, %d %B %Y %H:%M:%S')
+                date_time_str = date_header
+                date_time_obj = datetime.datetime.strptime(date_time_str, '%a, %d %b %Y %H:%M:%S %z')
                 dateoffile = date_time_obj.date().strftime("%Y%m%d")
             else:
                 dateoffile = "unknown_date"
@@ -39,3 +38,5 @@ for path in paths:
 
             os.rename(path, new_path)
             print("File Renamed:", new_path)
+
+            fp.close()  # Close the file
